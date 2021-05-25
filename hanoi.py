@@ -14,8 +14,42 @@ def create_problem_file(problem_file_name_, n_, m_):
     disks = ['d_%s' % i for i in list(range(n_))]  # [d_0,..., d_(n_ - 1)]
     pegs = ['p_%s' % i for i in list(range(m_))]  # [p_0,..., p_(m_ - 1)]
     problem_file = open(problem_file_name_, 'w')  # use problem_file.write(str) to write to problem_file
-    "*** YOUR CODE HERE ***"
 
+    # Firstly, we write the initial state.
+    problem_file.write("Initial state:")
+
+    # Write what spots are available (have nothing above them).
+    problem_file.write(" available-" + disks[0])
+    for peg in pegs[1:]:
+        problem_file.write(" available-" + peg)
+
+    # Write what's on top of what.
+    for i in range(1, len(disks)):
+        problem_file.write(" on-" + disks[i - 1] + "-" + disks[i])
+    problem_file.write(" on-" + disks[-1] + "-" + pegs[0])
+
+    # Write what's smaller than what.
+    for i, disk1 in enumerate(disks):
+        for disk2 in disks[i + 1:]:
+            problem_file.write(" smaller-" + disk1 + "-" + disk2)
+
+        for peg in pegs:
+            problem_file.write(" smaller-" + disk1 + "-" + peg)
+
+    # Finally, we write the goal state.
+    problem_file.write("\nGoal state:")
+
+    # Write what spots are available (have nothing above them).
+    problem_file.write(" available-" + disks[0])
+    for peg in pegs[:-1]:
+        problem_file.write(" available-" + peg)
+
+    # Write what's on top of what.
+    for i in range(1, len(disks)):
+        problem_file.write(" on-" + disks[i - 1] + "-" + disks[i])
+    problem_file.write(" on-" + disks[-1] + "-" + pegs[-1])
+
+    problem_file.write("\n")
     problem_file.close()
 
 
