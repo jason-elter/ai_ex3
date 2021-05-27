@@ -126,7 +126,7 @@ def level_sum(state, planning_problem):
     level_index = heuristic_value = 0
     while True:
         current_level = graph[level_index]
-        props = graph[level_index].get_proposition_layer().get_propositions()
+        props = current_level.get_proposition_layer().get_propositions()
 
         # Update heuristic_value
         found_subgoals = subgoal_set.intersection(props)
