@@ -130,13 +130,19 @@ class GraphPlan(object):
                     break
             if no_mutex:
                 providers.append(action1)
+
+        plans = []
         for action in providers:
             new_sub_goals = [g for g in sub_goals if g not in action.get_add()]
             plan_clone = list(_plan)
             plan_clone.append(action)
             new_plan = self.gp_search(graph, new_sub_goals, plan_clone, level)
             if new_plan is not None:
-                return new_plan
+                plans.append(new_plan)
+        if len(plans) > 0:
+            plans_size = list(map(lambda p: len(p), plans))
+            import numpy as np
+            return plans[np.argmin(plans_size)]
         return None
 
     def goal_state_not_in_prop_layer(self, propositions):
