@@ -57,7 +57,7 @@ class PlanGraphLevel(object):
         if all the preconditions of action are in the previous propositions layer
         self.actionLayer.addAction(action) adds action to the current action layer
         """
-        # TODO maybe we should add noOp actions here that pass propositions from last layer to current
+
         all_actions = PlanGraphLevel.actions
 
         for action in all_actions:
@@ -77,6 +77,7 @@ class PlanGraphLevel(object):
         """
         current_layer_actions = self.action_layer.get_actions()
         "*** YOUR CODE HERE ***"
+        current_layer_actions = list(current_layer_actions)
         for i, action1 in enumerate(current_layer_actions):
             for action2 in current_layer_actions[i + 1:]:
                 if mutex_actions(action1, action2,
