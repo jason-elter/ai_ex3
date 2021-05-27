@@ -108,6 +108,29 @@ def max_level(state, planning_problem):
     pg_init.set_proposition_layer(prop_layer_init)   #update the new plan graph level with the the proposition layer
     """
     "*** YOUR CODE HERE ***"
+    prop_layer_init = PropositionLayer()
+    for prop in state:
+        prop_layer_init.add_proposition(prop)
+    pg_init = PlanGraphLevel()
+    pg_init.set_proposition_layer(prop_layer_init)
+    goal_set = set(planning_problem.goal)
+    graph = [pg_init]
+    level_index = 0
+    while True:
+        current_level = graph[level_index]
+        props = current_level.get_proposition_layer().get_propositions()
+        # Check if done and return heuristic value.
+        if goal_set.issubset(props):
+            return level_index
+
+        # Check if goal is still reachable.
+        if is_fixed(graph, level_index):
+            return float('inf')
+
+        new_level = PlanGraphLevel()
+        new_level.expand_without_mutex(current_level)
+        graph.append(new_level)
+        level_index += 1
 
 
 def level_sum(state, planning_problem):
