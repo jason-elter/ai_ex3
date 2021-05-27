@@ -237,8 +237,8 @@ def independent_pair(a1, a2):
     a1_incon_a2_check = set(a1.get_add()).isdisjoint(a2.get_delete())
     a2_incon_a1_check = set(a2.get_add()).isdisjoint(a1.get_delete())
 
-    a1_interference_a2_check = set(a1.getdelete()).isdisjoint(a2.get_pre())
-    a2_interference_a1_check = set(a2.getdelete()).isdisjoint(a1.get_pre())
+    a1_interference_a2_check = set(a1.get_delete()).isdisjoint(a2.get_pre())
+    a2_interference_a1_check = set(a2.get_delete()).isdisjoint(a1.get_pre())
 
     return a1_incon_a2_check and \
            a2_incon_a1_check and \

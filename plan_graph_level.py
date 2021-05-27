@@ -100,7 +100,6 @@ class PlanGraphLevel(object):
 
         """
         current_layer_actions = self.action_layer.get_actions()
-        "*** YOUR CODE HERE ***"
         track = dict()
         for a in current_layer_actions:
             for p in a.get_add():
@@ -109,6 +108,8 @@ class PlanGraphLevel(object):
                 else:
                     track[p] = Proposition(p.get_name())
                     track[p].add_producer(a)
+        for p in track.keys():
+            self.proposition_layer.add_proposition(track[p])
 
 
     def update_mutex_proposition(self):
