@@ -76,6 +76,12 @@ class PlanGraphLevel(object):
         """
         current_layer_actions = self.action_layer.get_actions()
         "*** YOUR CODE HERE ***"
+        for i, action1 in enumerate(current_layer_actions):
+            for action2 in current_layer_actions[i + 1:]:
+                if mutex_actions(action1, action2,
+                                 previous_layer_mutex_proposition):
+                    self.action_layer.add_mutex_actions(action1, action2)
+
 
 
     def update_proposition_layer(self):
@@ -158,7 +164,6 @@ def have_competing_needs(a1, a2, mutex_props):
     Hint: for propositions p  and q, the command  "Pair(p, q) in mutex_props"
           returns true if p and q are mutex in the previous level
     """
-    "*** YOUR CODE HERE ***"
     for p1 in a1.get_pre():
         for p2 in a2.get_pre():
             if Pair(p1, p2) in mutex_props:
