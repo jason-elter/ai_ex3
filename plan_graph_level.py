@@ -84,7 +84,6 @@ class PlanGraphLevel(object):
                                  previous_layer_mutex_proposition):
                     self.action_layer.add_mutex_actions(action1, action2)
 
-
     def update_proposition_layer(self):
         """
         Updates the propositions in the current proposition layer,
@@ -103,14 +102,12 @@ class PlanGraphLevel(object):
         track = dict()
         for a in current_layer_actions:
             for p in a.get_add():
-                if p in track:
-                    track[p].add_producer(a)
-                else:
+                if p not in track:
                     track[p] = Proposition(p.get_name())
-                    track[p].add_producer(a)
-        for p in track.keys():
-            self.proposition_layer.add_proposition(track[p])
+                track[p].add_producer(a)
 
+        for p in track.values():
+            self.proposition_layer.add_proposition(p)
 
     def update_mutex_proposition(self):
         """

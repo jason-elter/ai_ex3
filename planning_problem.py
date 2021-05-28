@@ -113,6 +113,7 @@ def max_level(state, planning_problem):
         prop_layer_init.add_proposition(prop)
     pg_init = PlanGraphLevel()
     pg_init.set_proposition_layer(prop_layer_init)
+
     goal_set = set(planning_problem.goal)
     graph = [pg_init]
     level_index = 0

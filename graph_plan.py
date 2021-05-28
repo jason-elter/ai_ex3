@@ -245,6 +245,7 @@ def independent_pair(a1, a2):
            a1_interference_a2_check and \
            a2_interference_a1_check
 
+
 if __name__ == '__main__':
     import sys
     import time
